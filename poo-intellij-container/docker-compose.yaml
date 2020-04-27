@@ -1,0 +1,22 @@
+version: '3'
+services:
+  intellij:
+    privileged: true
+    tty: true
+    network_mode: host
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      args:
+        UID: ${UID}
+        GID: ${GID}
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - ~/.Idea:/home/developer/.Idea
+      - ~/.Idea.java:/home/developer/.java
+      - ~/.Idea.maven:/home/developer/.m2
+      - ~/.Idea.gradle:/home/developer/.gradle
+      - ~/.Idea.share:/home/developer/.local/share/JetBrains
+      - ~/IdeaProjects:/home/developer/IdeaProjects
+    environment:
+      - DISPLAY
